@@ -41,6 +41,7 @@ public class SeparatedEditText extends EditText {
     private int boxWidth;//方块宽度
     private int boxHeight;//方块高度
 
+
     private int spacing;//方块之间间隙
     private int corner;//圆角
     private int maxLength;//最大位数
@@ -99,44 +100,72 @@ public class SeparatedEditText extends EditText {
 
     public void setSpacing(int spacing) {
         this.spacing = spacing;
+        postInvalidate();
     }
 
     public void setCorner(int corner) {
         this.corner = corner;
+        postInvalidate();
     }
 
     public void setMaxLength(int maxLength) {
         this.maxLength = maxLength;
+        postInvalidate();
     }
 
     public void setBorderWidth(int borderWidth) {
         this.borderWidth = borderWidth;
+        postInvalidate();
     }
 
     public void setPassword(boolean password) {
-        password = password;
+        this.password = password;
+        postInvalidate();
+    }
+
+    public void setShowCursor(boolean showCursor) {
+        this.showCursor = showCursor;
+        postInvalidate();
+    }
+
+    public void setCursorDuration(int cursorDuration) {
+        this.cursorDuration = cursorDuration;
+        postInvalidate();
+    }
+
+    public void setCursorWidth(int cursorWidth) {
+        this.cursorWidth = cursorWidth;
+        postInvalidate();
+    }
+
+    public void setCursorColor(int cursorColor) {
+        this.cursorColor = cursorColor;
+        postInvalidate();
     }
 
     public void setType(int type) {
         this.type = type;
-    }
-
-    public void setTextColor(int textColor) {
-        this.textColor = textColor;
-    }
-
-    public void setBlockColor(int blockColor) {
-        this.blockColor = blockColor;
+        postInvalidate();
     }
 
     public void setBorderColor(int borderColor) {
         this.borderColor = borderColor;
+        postInvalidate();
     }
 
+    public void setBlockColor(int blockColor) {
+        this.blockColor = blockColor;
+        postInvalidate();
+    }
+
+    @Override
+    public void setTextColor(int textColor) {
+        this.textColor = textColor;
+        postInvalidate();
+    }
+
+
     private void init() {
-
-        Log.i("ddd", "init: " + cursorWidth + " " + borderWidth);
-
         this.setFocusableInTouchMode(true);
         this.setFocusable(true);
         this.requestFocus();
@@ -195,8 +224,6 @@ public class SeparatedEditText extends EditText {
         super.onSizeChanged(w, h, oldw, oldh);
         width = w;
         height = h;
-        Log.i("ddd", "onSizeChanged: " + w + " " + width);
-        Log.i("ddd", "onSizeChanged: " + h + " " + height);
 
         boxWidth = (width - spacing * (maxLength + 1)) / maxLength;
         boxHeight = height;
@@ -223,7 +250,6 @@ public class SeparatedEditText extends EditText {
      */
     private void drawCursor(Canvas canvas) {
         if (!isCursorShowing && showCursor && contentText.length() < maxLength && hasFocus()) {
-            Log.i("ddd", "drawCursor: " + contentText.length());
             int cursorPosition = contentText.length() + 1;
             int startX = spacing * cursorPosition + boxWidth * (cursorPosition - 1) + boxWidth / 2;
             int startY = boxHeight / 4;
@@ -258,7 +284,6 @@ public class SeparatedEditText extends EditText {
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
-        Log.i("ddd", "onTextChanged: ");
         contentText = text;
         invalidate();
 
@@ -266,9 +291,6 @@ public class SeparatedEditText extends EditText {
             if (text.length() == maxLength)
                 textChangedListener.textCompleted(text);
             else textChangedListener.textChanged(text);
-
-        Log.i("ddd", "onTextChanged: " + text + " " + start + " " + lengthBefore + " " + lengthAfter);
-
     }
 
     @Override
