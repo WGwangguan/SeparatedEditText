@@ -8,10 +8,11 @@
 ## 如何安装
 
 在build.gradle中添加如下引用
-```
-dependencies {
-    compile 'com.github.User:Repo:Tag'
-  }
+```java
+	dependencies {
+	        compile 'com.github.WGwangguan:SeparatedEditText:v1.0'
+	}
+
 ```
 
 ## 如何使用
@@ -111,7 +112,7 @@ cursorDuration | 设置游标闪烁时长 毫秒
 ## LICENSE
 
 ```
-Copyright 2017 Wh1te
+Copyright 2017 WGwangguan
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
