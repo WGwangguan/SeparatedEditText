@@ -3,7 +3,11 @@
 
 ## screenshot
 
-<img src='https://github.com/WGwangguan/SeparatedEditText/tree/master/screenshot/screen.gif' height='600'/>
+<img src='https://github.com/WGwangguan/SeparatedEditText/blob/master/screenshot/shixin.gif' height='600'/>
+
+<img src='https://github.com/WGwangguan/SeparatedEditText/blob/master/screenshot/kongxin.gif' height='600'/>
+
+<img src='https://github.com/WGwangguan/SeparatedEditText/blob/master/screenshot/kongxin.gif' height='600'/>
 
 ## 如何安装
 
