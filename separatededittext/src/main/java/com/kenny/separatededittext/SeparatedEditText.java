@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
