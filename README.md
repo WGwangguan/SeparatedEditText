@@ -11,12 +11,21 @@
 
 ## 如何安装
 
-在build.gradle中添加如下引用
+- 配置根目录的build.gradle 
 ```java
-	dependencies {
-	        compile 'com.github.WGwangguan:SeparatedEditText:v1.0'
+allprojects {
+	repositories {
+		...
+		maven { url "https://jitpack.io" }
 	}
+}
+```
 
+- 配置app module的build.gradle 
+```java
+dependencies {
+    implementation 'com.github.WGwangguan:SeparatedEditText:v1.0'
+}
 ```
 
 ## 如何使用
