@@ -24,7 +24,7 @@ allprojects {
 - 配置app module的build.gradle 
 ```java
 dependencies {
-    implementation 'com.github.WGwangguan:SeparatedEditText:v1.0'
+    implementation 'com.github.WGwangguan:SeparatedEditText:v1.2'
 }
 ```
 
