@@ -9,8 +9,10 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.util.AttributeSet;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +22,7 @@ import java.util.TimerTask;
  * Desc：
  */
 
-public class SeparatedEditText extends EditText {
+public class SeparatedEditText extends android.support.v7.widget.AppCompatEditText {
 
     private static final int TYPE_HOLLOW = 1;//空心
     private static final int TYPE_SOLID = 2;//实心
@@ -74,6 +76,30 @@ public class SeparatedEditText extends EditText {
 
     public SeparatedEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        setLongClickable(false);
+        setTextIsSelectable(false);
+        setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            @Override
+            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                return false;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode actionMode) {
+
+            }
+        });
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SeparatedEditText);
 
@@ -303,6 +329,23 @@ public class SeparatedEditText extends EditText {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         timer.cancel();
+    }
+
+    @Override
+    public boolean onTextContextMenuItem(int id) {
+        return true;
+    }
+
+    @Override
+    protected void onSelectionChanged(int selStart, int selEnd) {
+        CharSequence text = getText();
+        if (text != null) {
+            if (selStart != text.length() || selEnd != text.length()) {
+                setSelection(text.length(), text.length());
+                return;
+            }
+        }
+        super.onSelectionChanged(selStart, selEnd);
     }
 
     private void drawText(Canvas canvas, CharSequence charSequence) {

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/SeparatedEditText.iml" filepath="$PROJECT_DIR$/.idea/SeparatedEditText.iml" />
       <module fileurl="file://$PROJECT_DIR$/SeparatedEditText.iml" filepath="$PROJECT_DIR$/SeparatedEditText.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/separatededittext/separatededittext.iml" filepath="$PROJECT_DIR$/separatededittext/separatededittext.iml" />
       <module fileurl="file://$PROJECT_DIR$/separatededittext/separatededittext.iml" filepath="$PROJECT_DIR$/separatededittext/separatededittext.iml" />
     </modules>
   </component>
