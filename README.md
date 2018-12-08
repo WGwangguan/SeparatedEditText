@@ -1,4 +1,4 @@
-# SeparatedEditText
+# SeparatedEditText [![](https://jitpack.io/v/WGwangguan/SeparatedEditText.svg)](https://jitpack.io/#WGwangguan/SeparatedEditText)
 仿支付宝密码输入框、微信密码输入框，美团外卖验证码输入框等。有实心，空心以及下划线形式。可控制文本是否显示。
 
 ## screenshot
@@ -24,7 +24,7 @@ allprojects {
 - 配置app module的build.gradle 
 ```java
 dependencies {
-    implementation 'com.github.WGwangguan:SeparatedEditText:v1.2'
+    implementation 'com.github.WGwangguan:SeparatedEditText:Tag'
 }
 ```
 
