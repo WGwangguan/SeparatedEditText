@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SeparatedEditText.iml" filepath="$PROJECT_DIR$/.idea/SeparatedEditText.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SeparatedEditText.iml" filepath="$PROJECT_DIR$/SeparatedEditText.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SeparatedEditText-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SeparatedEditText-app.iml" group="SeparatedEditText/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/StudioProjects-SeparatedEditText.iml" filepath="$PROJECT_DIR$/.idea/modules/StudioProjects-SeparatedEditText.iml" group="SeparatedEditText" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/separatededittext/separatededittext.iml" filepath="$PROJECT_DIR$/separatededittext/separatededittext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/separatededittext/com.github.WGwangguan-separatededittext.iml" filepath="$PROJECT_DIR$/.idea/modules/separatededittext/com.github.WGwangguan-separatededittext.iml" group="SeparatedEditText/separatededittext" />
       <module fileurl="file://$PROJECT_DIR$/separatededittext/separatededittext.iml" filepath="$PROJECT_DIR$/separatededittext/separatededittext.iml" />
     </modules>
   </component>
