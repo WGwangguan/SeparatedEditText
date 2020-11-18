@@ -63,6 +63,7 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
     private var textColor: Int
     private var highLightColor: Int // 框框高亮颜色
 
+    private var highLightBefore = false // 待输入之前的一并高亮
     private var isCursorShowing = false
     private var contentText: CharSequence = ""
     private var textChangedListener: TextChangedListener? = null
@@ -257,9 +258,10 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         val currentPos = contentText.length
         loop@ for (i in 0 until maxLength) {
             boxRectF[spacing * i + boxWidth * i.toFloat(), 0f, spacing * i + boxWidth * i + boxWidth.toFloat()] = boxHeight.toFloat()
+            val light = highLightBefore.matchValue(currentPos >= i, currentPos == i)
             when (type) {
-                TYPE_SOLID -> canvas.drawRoundRect(boxRectF, corner.toFloat(), corner.toFloat(), blockPaint.apply { color = (highLightEnable && hasFocus() && currentPos == i).matchValue(highLightColor, blockColor) })
-                TYPE_UNDERLINE -> canvas.drawLine(boxRectF.left, boxRectF.bottom, boxRectF.right, boxRectF.bottom, borderPaint.apply { color = (highLightEnable && hasFocus() && currentPos == i).matchValue(highLightColor, borderColor) })
+                TYPE_SOLID -> canvas.drawRoundRect(boxRectF, corner.toFloat(), corner.toFloat(), blockPaint.apply { color = (highLightEnable && hasFocus() && light).matchValue(highLightColor, blockColor) })
+                TYPE_UNDERLINE -> canvas.drawLine(boxRectF.left, boxRectF.bottom, boxRectF.right, boxRectF.bottom, borderPaint.apply { color = (highLightEnable && hasFocus() && light).matchValue(highLightColor, borderColor) })
                 TYPE_HOLLOW -> {
                     if (i == 0 || i == maxLength) continue@loop
                     canvas.drawLine(boxRectF.left, boxRectF.top, boxRectF.left, boxRectF.bottom, borderPaint.apply { color = borderColor })
@@ -378,6 +380,7 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         blockColor = ta.getColor(R.styleable.SeparatedEditText_blockColor, ContextCompat.getColor(getContext(), R.color.colorPrimary))
         textColor = ta.getColor(R.styleable.SeparatedEditText_textColor, ContextCompat.getColor(getContext(), R.color.lightGrey))
         highLightColor = ta.getColor(R.styleable.SeparatedEditText_highlightColor, ContextCompat.getColor(getContext(), R.color.lightGrey))
+        highLightBefore = ta.getBoolean(R.styleable.SeparatedEditText_highLightBefore, false)
         cursorColor = ta.getColor(R.styleable.SeparatedEditText_cursorColor, ContextCompat.getColor(getContext(), R.color.lightGrey))
         corner = ta.getDimension(R.styleable.SeparatedEditText_corner, 0f).toInt()
         spacing = ta.getDimension(R.styleable.SeparatedEditText_blockSpacing, 0f).toInt()

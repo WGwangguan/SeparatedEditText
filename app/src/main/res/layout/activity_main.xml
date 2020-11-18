@@ -37,6 +37,7 @@
         android:inputType="number"
         app:blockSpacing="10dp"
         app:borderColor="@color/lightGrey"
+        app:highLightBefore="true"
         app:highLightEnable="true"
         app:highlightColor="@color/colorAccent"
         app:separateType="@integer/type_underline"

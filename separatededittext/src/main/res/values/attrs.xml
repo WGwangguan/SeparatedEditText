@@ -5,6 +5,7 @@
         <attr name="password" format="boolean" />
         <attr name="showCursor" format="boolean" />
         <attr name="highLightEnable" format="boolean" />
+        <attr name="highLightBefore" format="boolean" />
         <attr name="separateType" format="reference|integer" />
         <attr name="maxLength" format="integer" />
         <attr name="corner" format="dimension" />
