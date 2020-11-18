@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="16dp"
+    android:background="@drawable/shadow"
+    android:paddingBottom="12dp"
+    android:text="@string/paste"
+    android:textColor="@android:color/black"
+    android:textSize="16sp" />
+

@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.kenny.separatededittextdemo.MainActivity">
 
     <com.kenny.separatededittext.SeparatedEditText
@@ -20,10 +20,12 @@
         app:blockColor="@color/colorPrimary"
         app:blockSpacing="2dp"
         app:corner="10dp"
-        app:maxLength="9"
-        app:cursorWidth="3dp"
-        app:cursorDuration="1000"
         app:cursorColor="@android:color/holo_green_light"
+        app:cursorDuration="1000"
+        app:cursorWidth="3dp"
+        app:highLightEnable="true"
+        app:highlightColor="@color/colorAccent"
+        app:maxLength="9"
         app:separateType="@integer/type_solid"
         app:textColor="@color/colorAccent" />
 
@@ -35,6 +37,8 @@
         android:inputType="number"
         app:blockSpacing="10dp"
         app:borderColor="@color/lightGrey"
+        app:highLightEnable="true"
+        app:highlightColor="@color/colorAccent"
         app:separateType="@integer/type_underline"
         app:textColor="@color/colorAccent" />
 
@@ -49,6 +53,8 @@
         app:corner="10dp"
         app:cursorColor="@android:color/holo_orange_light"
         app:cursorWidth="3dp"
+        app:highLightEnable="true"
+        app:highlightColor="@color/colorAccent"
         app:maxLength="4"
         app:separateType="@integer/type_hollow"
         app:textColor="@color/colorAccent" />

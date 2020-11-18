@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SeparatedEditText</string>
+    <string name="paste">粘贴</string>
 </resources>
