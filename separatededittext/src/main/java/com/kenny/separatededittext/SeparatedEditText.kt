@@ -9,7 +9,6 @@ import android.os.Handler
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.AttributeSet
-import android.util.Log
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
@@ -82,7 +81,9 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
 
     fun setMaxLength(maxLength: Int) {
         this.maxLength = maxLength
-        postInvalidate()
+        this.filters = arrayOf<InputFilter>(LengthFilter(maxLength))
+        initBox()
+        clearText()
     }
 
     fun setBorderWidth(borderWidth: Int) {
@@ -198,7 +199,6 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         timer = Timer()
 
         setOnLongClickListener {
-            Log.i("ddd", "view ${it.x}  ${it.y}")
             handlePaste(it)
             return@setOnLongClickListener true
         }
@@ -227,6 +227,10 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         super.onSizeChanged(w, h, oldw, oldh)
         mWidth = w
         mHeight = h
+        initBox()
+    }
+
+    private fun initBox() {
         boxWidth = (mWidth - spacing * (maxLength - 1)) / maxLength
         boxHeight = mHeight
         borderRectF.set(0f, 0f, mWidth.toFloat(), mHeight.toFloat())
@@ -355,7 +359,6 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
     }
 
     init {
-//        isLongClickable = false
         setTextIsSelectable(false)
         customSelectionActionModeCallback = object : ActionMode.Callback {
             override fun onCreateActionMode(actionMode: ActionMode, menu: Menu): Boolean {
