@@ -1,5 +1,5 @@
 # SeparatedEditText [![](https://jitpack.io/v/WGwangguan/SeparatedEditText.svg)](https://jitpack.io/#WGwangguan/SeparatedEditText)
-仿支付宝密码输入框、微信密码输入框，美团外卖验证码输入框等。有实心，空心以及下划线形式。可控制文本是否显示。
+仿支付宝密码输入框、微信密码输入框，美团外卖验证码输入框等。有实心，空心以及下划线形式。可控制文本是否显示,支持高亮。
 
 ## screenshot
 
@@ -8,6 +8,11 @@
 <img src='https://github.com/WGwangguan/SeparatedEditText/blob/master/screenshot/kongxin.gif' height='600'/>
 
 <img src='https://github.com/WGwangguan/SeparatedEditText/blob/master/screenshot/kongxin.gif' height='600'/>
+
+## 升级日志
+
+
+- v1.3.1 支持高亮显示及粘贴功能
 
 ## 如何安装
 
@@ -120,6 +125,9 @@ textColor | 设置文本绘制颜色
 cursorColor | 设置游标显示颜色
 cursorWidth | 设置进游标宽度
 cursorDuration | 设置游标闪烁时长 毫秒
+highLightEnable | 设置是否开启高亮 type_solid、type_underline适用
+highLightBefore | 设置仅待输入位高亮亦或是待输入位及之前高亮 type_solid、type_underline适用
+highlightColor | 设置高亮颜色 type_solid、type_underline适用
 
 
 ## LICENSE
