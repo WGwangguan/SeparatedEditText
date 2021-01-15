@@ -18,6 +18,7 @@
         <attr name="cursorWidth" format="dimension" />
         <attr name="cursorColor" format="color|reference" />
         <attr name="borderWidth" format="dimension" />
+        <attr name="showKeyboard" format="boolean" />
     </declare-styleable>
 
     <integer name="type_hollow">1</integer>

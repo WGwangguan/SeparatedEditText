@@ -27,6 +27,7 @@
         app:highlightColor="@color/colorAccent"
         app:maxLength="9"
         app:separateType="@integer/type_solid"
+        app:showKeyboard="false"
         app:textColor="@color/colorAccent" />
 
     <com.kenny.separatededittext.SeparatedEditText
@@ -41,6 +42,7 @@
         app:highLightEnable="true"
         app:highlightColor="@color/colorAccent"
         app:separateType="@integer/type_underline"
+        app:showKeyboard="false"
         app:textColor="@color/colorAccent" />
 
 
@@ -58,6 +60,7 @@
         app:highlightColor="@color/colorAccent"
         app:maxLength="4"
         app:separateType="@integer/type_hollow"
+        app:showKeyboard="false"
         app:textColor="@color/colorAccent" />
 
 

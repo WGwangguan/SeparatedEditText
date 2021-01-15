@@ -57,6 +57,8 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
 
     private var highLightEnable: Boolean // 是否显示框框高亮
 
+    private var showKeyboard: Boolean
+
     private var borderColor: Int
     private var blockColor: Int
     private var textColor: Int
@@ -152,10 +154,12 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         this.requestFocus()
         this.isCursorVisible = false
         this.filters = arrayOf<InputFilter>(LengthFilter(maxLength))
-        Handler().postDelayed({
+        if (showKeyboard){
+            Handler().postDelayed({
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED)
         }, 500)
+        }
 
         blockPaint = Paint().apply {
             isAntiAlias = true
@@ -392,6 +396,7 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         cursorDuration = ta.getInt(R.styleable.SeparatedEditText_cursorDuration, 500)
         cursorWidth = ta.getDimension(R.styleable.SeparatedEditText_cursorWidth, 2f).toInt()
         borderWidth = ta.getDimension(R.styleable.SeparatedEditText_borderWidth, 5f).toInt()
+        showKeyboard = ta.getBoolean(R.styleable.SeparatedEditText_showKeyboard, true)
         ta.recycle()
         init()
     }
