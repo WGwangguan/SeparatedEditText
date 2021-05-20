@@ -14,6 +14,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import java.util.*
@@ -56,6 +57,7 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
     private var type: Int//实心方式、空心方式
 
     private var highLightEnable: Boolean // 是否显示框框高亮
+    private var highLightStyle: Int // 高亮样式，仅支持 solid
 
     private var showKeyboard: Boolean
 
@@ -63,6 +65,7 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
     private var blockColor: Int
     private var textColor: Int
     private var highLightColor: Int // 框框高亮颜色
+    private var errorColor: Int // 框框错误颜色
 
     private var highLightBefore = false // 待输入之前的一并高亮
     private var isCursorShowing = false
@@ -70,6 +73,8 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
     private var textChangedListener: TextChangedListener? = null
     private lateinit var timer: Timer
     private lateinit var timerTask: TimerTask
+
+    private var showError = false
 
     fun setSpacing(spacing: Int) {
         this.spacing = spacing
@@ -123,7 +128,7 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         postInvalidate()
     }
 
-    fun setType(type: Int) {
+    fun setType(@TypeDef type: Int) {
         this.type = type
         postInvalidate()
     }
@@ -148,17 +153,34 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         postInvalidate()
     }
 
+    fun setErrorColor(color: Int) {
+        this.errorColor = color
+        postInvalidate()
+    }
+
+    fun showError() {
+        if (this.type in listOf(TYPE_SOLID, TYPE_UNDERLINE)) {
+            showError = true
+            postInvalidate()
+        }
+    }
+
+    fun setHighlightStyle(@StyleDef style: Int) {
+        this.highLightStyle = style
+        postInvalidate()
+    }
+
     private fun init() {
         this.isFocusableInTouchMode = true
         this.isFocusable = true
         this.requestFocus()
         this.isCursorVisible = false
         this.filters = arrayOf<InputFilter>(LengthFilter(maxLength))
-        if (showKeyboard){
+        if (showKeyboard) {
             Handler().postDelayed({
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED)
-        }, 500)
+                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED)
+            }, 500)
         }
 
         blockPaint = Paint().apply {
@@ -268,8 +290,37 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
             boxRectF[spacing * i + boxWidth * i.toFloat(), 0f, spacing * i + boxWidth * i + boxWidth.toFloat()] = boxHeight.toFloat()
             val light = highLightBefore.matchValue(currentPos >= i, currentPos == i)
             when (type) {
-                TYPE_SOLID -> canvas.drawRoundRect(boxRectF, corner.toFloat(), corner.toFloat(), blockPaint.apply { color = (highLightEnable && hasFocus() && light).matchValue(highLightColor, blockColor) })
-                TYPE_UNDERLINE -> canvas.drawLine(boxRectF.left, boxRectF.bottom, boxRectF.right, boxRectF.bottom, borderPaint.apply { color = (highLightEnable && hasFocus() && light).matchValue(highLightColor, borderColor) })
+                TYPE_SOLID -> {
+                    if (showError) {
+                        if (highLightStyle == STYLE_SOLID) {
+                            canvas.drawRoundRect(boxRectF, corner.toFloat(), corner.toFloat(), blockPaint.apply { color = errorColor })
+                        } else {
+                            val tempRect = RectF(boxRectF.left + borderWidth / 2, boxRectF.top + borderWidth / 2, boxRectF.right - borderWidth / 2, boxRectF.bottom - borderWidth / 2)
+                            canvas.drawRoundRect(tempRect, corner.toFloat(), corner.toFloat(), borderPaint.apply { color = errorColor })
+                        }
+                        continue@loop
+                    }
+                    if (highLightEnable && hasFocus() && light) {
+                        if (highLightStyle == STYLE_SOLID) {
+                            canvas.drawRoundRect(boxRectF, corner.toFloat(), corner.toFloat(), blockPaint.apply { color = highLightColor })
+                        } else {
+                            canvas.drawRoundRect(boxRectF, corner.toFloat(), corner.toFloat(), blockPaint.apply { color = blockColor })
+                            val tempRect = RectF(boxRectF.left + borderWidth / 2, boxRectF.top + borderWidth / 2, boxRectF.right - borderWidth / 2, boxRectF.bottom - borderWidth / 2)
+                            canvas.drawRoundRect(tempRect, corner.toFloat(), corner.toFloat(), borderPaint.apply { color = highLightColor })
+                        }
+                    } else {
+                        canvas.drawRoundRect(boxRectF, corner.toFloat(), corner.toFloat(), blockPaint.apply { color = blockColor })
+                    }
+//
+                }
+                TYPE_UNDERLINE -> {
+                    if (showError) {
+                        canvas.drawLine(boxRectF.left, boxRectF.bottom, boxRectF.right, boxRectF.bottom, borderPaint.apply { color = errorColor })
+                        continue@loop
+                    }
+                    canvas.drawLine(boxRectF.left, boxRectF.bottom, boxRectF.right, boxRectF.bottom, borderPaint.apply { color = (highLightEnable && hasFocus() && light).matchValue(highLightColor, borderColor) })
+
+                }
                 TYPE_HOLLOW -> {
                     if (i == 0 || i == maxLength) continue@loop
                     canvas.drawLine(boxRectF.left, boxRectF.top, boxRectF.left, boxRectF.bottom, borderPaint.apply { color = borderColor })
@@ -282,6 +333,7 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
 
     override fun onTextChanged(text: CharSequence, start: Int, lengthBefore: Int, lengthAfter: Int) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter)
+        showError = false
         contentText = text
         invalidate()
         textChangedListener?.also {
@@ -360,6 +412,17 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         private const val TYPE_HOLLOW = 1 //空心
         private const val TYPE_SOLID = 2 //实心
         private const val TYPE_UNDERLINE = 3 //下划线
+
+        private const val STYLE_SOLID = 1 //实心
+        private const val STYLE_BORDER = 2 // 边界
+
+        @Retention(AnnotationRetention.SOURCE)
+        @IntDef(STYLE_SOLID, STYLE_BORDER)
+        annotation class StyleDef
+
+        @Retention(AnnotationRetention.SOURCE)
+        @IntDef(TYPE_HOLLOW, TYPE_SOLID, TYPE_UNDERLINE)
+        annotation class TypeDef
     }
 
     init {
@@ -392,11 +455,13 @@ class SeparatedEditText @JvmOverloads constructor(context: Context, attrs: Attri
         corner = ta.getDimension(R.styleable.SeparatedEditText_corner, 0f).toInt()
         spacing = ta.getDimension(R.styleable.SeparatedEditText_blockSpacing, 0f).toInt()
         type = ta.getInt(R.styleable.SeparatedEditText_separateType, TYPE_HOLLOW)
+        highLightStyle = ta.getInt(R.styleable.SeparatedEditText_highlightStyle, STYLE_SOLID)
         maxLength = ta.getInt(R.styleable.SeparatedEditText_maxLength, 6)
         cursorDuration = ta.getInt(R.styleable.SeparatedEditText_cursorDuration, 500)
         cursorWidth = ta.getDimension(R.styleable.SeparatedEditText_cursorWidth, 2f).toInt()
         borderWidth = ta.getDimension(R.styleable.SeparatedEditText_borderWidth, 5f).toInt()
         showKeyboard = ta.getBoolean(R.styleable.SeparatedEditText_showKeyboard, true)
+        errorColor = ta.getColor(R.styleable.SeparatedEditText_errorColor, ContextCompat.getColor(getContext(), R.color.errorColor))
         ta.recycle()
         init()
     }

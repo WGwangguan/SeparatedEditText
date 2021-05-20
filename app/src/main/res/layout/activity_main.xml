@@ -17,18 +17,20 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:inputType="number"
-        app:blockColor="@color/colorPrimary"
-        app:blockSpacing="2dp"
-        app:corner="10dp"
+        app:blockColor="#149B9EA3"
+        app:borderWidth="1dp"
+        app:blockSpacing="4dp"
+        app:corner="8dp"
         app:cursorColor="@android:color/holo_green_light"
         app:cursorDuration="1000"
         app:cursorWidth="3dp"
         app:highLightEnable="true"
-        app:highlightColor="@color/colorAccent"
-        app:maxLength="9"
+        app:highlightColor="#3E93B2"
+        app:maxLength="6"
         app:separateType="@integer/type_solid"
         app:showKeyboard="false"
-        app:textColor="@color/colorAccent" />
+        app:highlightStyle="@integer/style_border"
+        app:textColor="#D9000000" />
 
     <com.kenny.separatededittext.SeparatedEditText
         android:id="@+id/edit_underline"
@@ -40,10 +42,10 @@
         app:borderColor="@color/lightGrey"
         app:highLightBefore="true"
         app:highLightEnable="true"
-        app:highlightColor="@color/colorAccent"
+        app:highlightColor="#D9000000"
         app:separateType="@integer/type_underline"
         app:showKeyboard="false"
-        app:textColor="@color/colorAccent" />
+        app:textColor="#D9000000" />
 
 
     <com.kenny.separatededittext.SeparatedEditText
@@ -60,7 +62,6 @@
         app:highlightColor="@color/colorAccent"
         app:maxLength="4"
         app:separateType="@integer/type_hollow"
-        app:showKeyboard="false"
         app:textColor="@color/colorAccent" />
 
 

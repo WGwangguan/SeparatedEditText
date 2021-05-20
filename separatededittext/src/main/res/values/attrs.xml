@@ -13,16 +13,21 @@
         <attr name="blockColor" format="color|reference" />
         <attr name="textColor" format="color|reference" />
         <attr name="highlightColor" format="color|reference" />
+        <attr name="highlightStyle" format="reference|integer" />
         <attr name="blockSpacing" format="dimension" />
         <attr name="cursorDuration" format="integer" />
         <attr name="cursorWidth" format="dimension" />
         <attr name="cursorColor" format="color|reference" />
         <attr name="borderWidth" format="dimension" />
         <attr name="showKeyboard" format="boolean" />
+        <attr name="errorColor" format="color|reference" />
     </declare-styleable>
 
     <integer name="type_hollow">1</integer>
     <integer name="type_solid">2</integer>
     <integer name="type_underline">3</integer>
+
+    <integer name="style_solid">1</integer>
+    <integer name="style_border">2</integer>
 
 </resources>

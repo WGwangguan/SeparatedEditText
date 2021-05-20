@@ -12,6 +12,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        edit_solid.setTextChangedListener(object : SeparatedEditText.TextChangedListener {
+            override fun textChanged(changeText: CharSequence?) {
+            }
+
+            override fun textCompleted(text: CharSequence?) {
+                edit_solid.showError()
+            }
+
+        })
+        edit_underline.setTextChangedListener(object : SeparatedEditText.TextChangedListener {
+            override fun textChanged(changeText: CharSequence?) {
+            }
+
+            override fun textCompleted(text: CharSequence?) {
+                edit_underline.showError()
+            }
+
+        })
     }
 
     fun handleContent(v: View?) {
