@@ -123,7 +123,7 @@ showCursor | 设置是否显示游标
 separateType | 设置显示样式：type_hollow、type_solid、type_underline
 maxLength | 设置显示框框个数
 corner | 设置圆角 dp
-borderColor | 设置边框颜色，type_hollow、type_underline适用
+borderColor | 设置边框颜色
 borderWidth | 设置边框粗细 dp
 blockColor | 设置框框实心部分颜色，type_solid适用
 blockSpacing | 设置框框间隙，type_solid、type_underline适用
