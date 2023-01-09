@@ -12,7 +12,13 @@
 ## 升级日志
 
 
-- v1.3.1 支持高亮显示及粘贴功能
+- v1.3.3 
+	* 新增实心高亮模式，支持块状高亮和边界高亮
+	* 支持错误高亮
+- v1.3.2 
+	* 新增 showKeyboard属性（是否自动弹出键盘） 默认为 true
+- v1.3.1 
+	* 支持高亮显示及粘贴功能
 
 ## 如何安装
 
@@ -128,6 +134,9 @@ cursorDuration | 设置游标闪烁时长 毫秒
 highLightEnable | 设置是否开启高亮 type_solid、type_underline适用
 highLightBefore | 设置仅待输入位高亮亦或是待输入位及之前高亮 type_solid、type_underline适用
 highlightColor | 设置高亮颜色 type_solid、type_underline适用
+showKeyboard | 设置是否自动显示键盘
+highlightStyle | 设置高亮的样式 style_solid、style_border 仅支持 type_solid
+errorColor | 设置错误颜色
 
 
 ## LICENSE
