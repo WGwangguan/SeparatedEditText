@@ -21,7 +21,7 @@
         app:borderWidth="1dp"
         app:blockSpacing="4dp"
         app:corner="8dp"
-        app:cursorColor="@android:color/holo_green_light"
+        app:cursorColor="#3E93B2"
         app:cursorDuration="1000"
         app:cursorWidth="3dp"
         app:highLightEnable="true"
